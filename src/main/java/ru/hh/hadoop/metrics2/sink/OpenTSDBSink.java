@@ -38,10 +38,10 @@ public class OpenTSDBSink implements MetricsSink {
         for (AbstractMetric metric : record.metrics()) {
             if (hostname != null) {
                 build.addDataPoint(metricsPathPrefix.toString() + "." + metric.name())
-                        .setValue(metric.value().intValue(), (int) (System.currentTimeMillis() / 1000))
+                        .setValue(metric.value().toString())
+                        .setTimestamp((int) (System.currentTimeMillis() / 1000))
                         .addTag("host", hostname);
             }
-
         }
 
         try {
